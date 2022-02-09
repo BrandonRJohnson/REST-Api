@@ -51,4 +51,16 @@ app.put('/:id', function(req, res){
     }
 });
 
+app.delete('/:id', function(req, res){
+    const deleteIndex = Books.map(function(book){
+        return book.id;
+    }).indexOf(parseInt(req.params.id));
+    if(removeIndex === -1){
+        res.json({message: "Not found"});
+     } else {
+        Books.splice(removeIndex, 1);
+        res.send({message: "Book id " + req.params.id + " removed."});
+     }
+})
+
 app.listen(PORT, () => console.log(`server is running on ${PORT}`));
